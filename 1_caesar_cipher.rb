@@ -1,12 +1,11 @@
 # Obs.: the method shifts only to the "right" along the alphabet
 def caesar_cipher(message, shift_factor)
   encrypted_message = ''
-  upcase_and_downcase_alphabets = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
   upcase_ascii_code_range = (65..90)
   downcase_ascii_code_range = (97..122)
   message.each_char do |char|
-    change_to_standard_letter(char)
-    if upcase_and_downcase_alphabets.include?(char)
+    char = change_to_standard_letter(char)
+    if char.between?('A', 'z')
       ascii_code = char.ord
       if upcase_ascii_code_range.include?(ascii_code)
         shifted_number = keep_inside_limits(ascii_code, upcase_ascii_code_range, shift_factor)
@@ -32,27 +31,27 @@ def keep_inside_limits(number, range, shift_factor)
 end
 
 def change_to_standard_letter(character)
-  if character in 'àãáâä'
+  if 'àãáâä'.include?(character)
     character = 'a'
-  elsif character in 'éèêë'
+  elsif 'éèêë'.include?(character)
     character = 'e'
-  elsif character in 'íìîï'
+  elsif 'íìîï'.include?(character)
     character = 'i'
-  elsif character in 'òóôõö'
+  elsif 'òóôõö'.include?(character)
     character = 'o'
-  elsif character in 'ùúûü'
+  elsif 'ùúûü'.include?(character)
     character = 'u'
   elsif character == 'ç'
     character = 'c'
-  elsif character in 'ÀÃÁÂÄ'
+  elsif 'ÀÃÁÂÄ'.include?(character)
     character = 'A'
-  elsif character in 'ÈÉÊË'
+  elsif 'ÈÉÊË'.include?(character)
     character = 'E'
-  elsif character in 'ÍÌÏÎ'
+  elsif 'ÍÌÏÎ'.include?(character)
     character = 'I'
-  elsif character in 'ÒÓÖÔÕ'
+  elsif 'ÒÓÖÔÕ'.include?(character)
     character = 'O'
-  elsif character in 'ÙÚÜÛ'
+  elsif 'ÙÚÜÛ'.include?(character)
     character = 'U'
   elsif character == 'Ç'
     character = 'C'
@@ -60,7 +59,7 @@ def change_to_standard_letter(character)
   character
 end
 
-msg = 'What a string!'
+msg = '"Löffel" means "spoon" in german!'
 f = 5
 enc_msg = caesar_cipher(msg, f)
 puts enc_msg
