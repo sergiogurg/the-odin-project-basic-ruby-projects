@@ -1,25 +1,24 @@
-require 'spec_helper'
 require_relative '../app/substrings'
 
 describe 'Substrings project' do
   it 'when the string is formed by only 1 (one) word' do
     dictionary = ["below","down","go","going","horn","how","howdy","it","i","low","own","part","partner","sit"]
-    string = 'below'
+    string = 'BELOW'
 
-    output = substrings(string, dictionary)
+    output = SubStrings.execute(string, dictionary)
     result = {
-      'bellow' => 1,
+      'below' => 1,
       'low' => 1
     }
 
     expect(output).to eq(result)
   end
 
-  xit 'when the string is formed by multiple words' do
+  it 'when the string is formed by multiple words' do
     dictionary = ["below","down","go","going","horn","how","howdy","it","i","low","own","part","partner","sit"]
     string = "Howdy partner, sit down! How's it going?"
 
-    output = substrings(string, dictionary)
+    output = SubStrings.execute(string, dictionary)
     result = {
       "down" => 1,
       "go" => 1,
